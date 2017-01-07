@@ -76,10 +76,7 @@ In the project, set it up to output *.bin files for the Debug and Release build 
 
 ## Sources
 
-The sources in this repo have been acquired from various places on the web. It is somewhat of a challenge to find the original source, but this README and the source code will be updated as I find these.
-
-Potential sources of the needed files include the following locations, but I'm having trouble getting all these working together as one:
-
+With the exception of main.c, the files in the src directory were pulled from other sources. The original location of these sources are as follows:
 
 * LPC17xx.h was pulled from [ARM Keil](http://www.keil.com/dd/chip/4868.htm) using the following command:
 
@@ -99,4 +96,9 @@ Potential sources of the needed files include the following locations, but I'm h
 	curl -O https://raw.githubusercontent.com/ARMmbed/mbed-os/master/targets/TARGET_NXP/TARGET_LPC176X/device/TOOLCHAIN_GCC_ARM/startup_LPC17xx.S
 	```
 
-`system_LPC17xx.{c,h,cpp}` - [mbed-os](https://github.com/ARMmbed/mbed-os) from the [ARMmbed github project](https://github.com/ARMmbed)
+* system_LPC17xx.[ch] were pulled from the [mbed-os](https://github.com/ARMmbed/mbed-os) github repo using the following commands:
+	
+	```
+	curl -O https://raw.githubusercontent.com/ARMmbed/mbed-os/master/targets/TARGET_NXP/TARGET_LPC176X/device/system_LPC17xx.h
+	curl -O https://raw.githubusercontent.com/ARMmbed/mbed-os/master/targets/TARGET_NXP/TARGET_LPC176X/device/system_LPC17xx.c
+	```
