@@ -14,7 +14,7 @@
  *
  * Finally, to get the frequency of the CPU clock, we divide by CCLK to
  * get a frequency of 100000000, or 100MHz. So, we'll roughly call a loop
- * of 10000 a ms.
+ * of 10000 iterations the equivalent of 1ms.
  */
 void delay_ms(unsigned int count) {
 	volatile unsigned int j = 0, i = 0;
