@@ -80,7 +80,11 @@ The sources in this repo have been acquired from various places on the web. It i
 
 Potential sources of the needed files include the following locations, but I'm having trouble getting all these working together as one:
 
-`LPC17xx.h` - [lpc17xx.h](http://www.keil.com/dd/docs/arm/nxp/lpc17xx/lpc17xx.h) from [ARM Keil](http://www.keil.com/dd/chip/4868.htm)
 
-`{system,startup}_LPC17xx.{c,h,cpp}`, `LPC17xx.h`, `LPC1768.ld` - [mbed-os](https://github.com/ARMmbed/mbed-os) from the [ARMmbed github project](https://github.com/ARMmbed)
+LPC17xx.h was pulled from [ARM Keil](http://www.keil.com/dd/chip/4868.htm) using the following command:
 
+```
+curl http://www.keil.com/dd/docs/arm/nxp/lpc17xx/lpc17xx.h -o src/LPC17xx.h
+```
+
+`{system,startup}_LPC17xx.{c,h,cpp}`, `LPC1768.ld` - [mbed-os](https://github.com/ARMmbed/mbed-os) from the [ARMmbed github project](https://github.com/ARMmbed)

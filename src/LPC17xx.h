@@ -1,19 +1,17 @@
-/**************************************************************************//**
- * @file     LPC17xx.h
- * @brief    CMSIS Cortex-M3 Core Peripheral Access Layer Header File for 
- *           NXP LPC17xx Device Series
- * @version  V1.07
- * @date     19. October 2009
+/******************************************************************************
+ * @file:    LPC17xx.h
+ * @purpose: CMSIS Cortex-M3 Core Peripheral Access Layer Header File for 
+ *           NXP LPC17xx Device Series 
+ * @version: V1.09
+ * @date:    17. March 2010
+ *----------------------------------------------------------------------------
  *
- * @note
- * Copyright (C) 2009 ARM Limited. All rights reserved.
+ * Copyright (C) 2008 ARM Limited. All rights reserved.
  *
- * @par
- * ARM Limited (ARM) is supplying this software for use with Cortex-M 
+ * ARM Limited (ARM) is supplying this software for use with Cortex-M3 
  * processor based microcontrollers.  This file can be freely distributed 
  * within development tools that are supporting such ARM based processors. 
  *
- * @par
  * THIS SOFTWARE IS PROVIDED "AS IS".  NO WARRANTIES, WHETHER EXPRESS, IMPLIED
  * OR STATUTORY, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE APPLY TO THIS SOFTWARE.
@@ -78,6 +76,8 @@ typedef enum IRQn
   MCPWM_IRQn                    = 30,       /*!< Motor Control PWM Interrupt                      */
   QEI_IRQn                      = 31,       /*!< Quadrature Encoder Interface Interrupt           */
   PLL1_IRQn                     = 32,       /*!< PLL1 Lock (USB PLL) Interrupt                    */
+  USBActivity_IRQn              = 33,       /* USB Activity interrupt                             */
+  CANActivity_IRQn              = 34,       /* CAN Activity interrupt                             */
 } IRQn_Type;
 
 
@@ -93,7 +93,7 @@ typedef enum IRQn
 #define __Vendor_SysTickConfig    0         /*!< Set to 1 if different SysTick Config is used     */
 
 
-#include "core_cm3.h"                       /* Cortex-M3 processor and core peripherals           */
+#include <core_cm3.h>                       /* Cortex-M3 processor and core peripherals           */
 #include "system_LPC17xx.h"                 /* System Header                                      */
 
 
@@ -126,7 +126,9 @@ typedef struct
   __IO uint32_t CCLKCFG;
   __IO uint32_t USBCLKCFG;
   __IO uint32_t CLKSRCSEL;
-       uint32_t RESERVED4[12];
+  __IO uint32_t	CANSLEEPCLR;
+  __IO uint32_t	CANWAKEFLAGS;
+       uint32_t RESERVED4[10];
   __IO uint32_t EXTINT;                 /* External Interrupts                */
        uint32_t RESERVED5;
   __IO uint32_t EXTMODE;
@@ -344,7 +346,7 @@ typedef struct
        uint8_t  RESERVED5[7];
   __IO uint8_t  TER;
        uint8_t  RESERVED6[39];
-  __I  uint8_t  FIFOLVL;
+  __IO uint32_t FIFOLVL;
 } LPC_UART_TypeDef;
 
 typedef struct
@@ -376,7 +378,7 @@ typedef struct
        uint8_t  RESERVED5[7];
   __IO uint8_t  TER;
        uint8_t  RESERVED6[39];
-  __I  uint8_t  FIFOLVL;
+  __IO uint32_t FIFOLVL;
 } LPC_UART0_TypeDef;
 
 typedef struct
@@ -417,7 +419,7 @@ typedef struct
        uint8_t  RESERVED10[3];
   __IO uint8_t  RS485DLY;
        uint8_t  RESERVED11[3];
-  __I  uint8_t  FIFOLVL;
+  __IO uint32_t FIFOLVL;
 } LPC_UART1_TypeDef;
 
 /*------------- Serial Peripheral Interface (SPI) ----------------------------*/
@@ -824,13 +826,15 @@ typedef struct
   __O  uint32_t USBSysErrIntSet;
        uint32_t RESERVED4[15];
 
+  union {
   __I  uint32_t I2C_RX;                 /* USB OTG I2C Registers              */
-  __O  uint32_t I2C_WO;
+  __O  uint32_t I2C_TX;
+  };
   __I  uint32_t I2C_STS;
   __IO uint32_t I2C_CTL;
   __IO uint32_t I2C_CLKHI;
   __O  uint32_t I2C_CLKLO;
-       uint32_t RESERVED5[823];
+       uint32_t RESERVED5[824];
 
   union {
   __IO uint32_t USBClkCtrl;             /* USB Clock Control Registers        */
