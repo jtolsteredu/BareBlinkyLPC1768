@@ -78,25 +78,6 @@ void WEAK      	QEI_IRQHandler(void);            /* Quadrature Encoder Interface
 void WEAK      	PLL1_IRQHandler(void);           /* PLL1 (USB PLL) */
 
 
-
-/* Exported types --------------------------------------------------------------*/
-/* Exported constants --------------------------------------------------------*/
-//extern unsigned long _etext;
-extern unsigned long _sidata;		/* start address for the initialization values of the .data section. defined in linker script */
-extern unsigned long _sdata;		/* start address for the .data section. defined in linker script */
-extern unsigned long _edata;		/* end address for the .data section. defined in linker script */
-
-extern unsigned long _sifastcode;		/* start address for the initialization values of the .fastcode section. defined in linker script */
-extern unsigned long _sfastcode;		/* start address for the .fastcode section. defined in linker script */
-extern unsigned long _efastcode;		/* end address for the .fastcode section. defined in linker script */
-
-extern unsigned long _sbss;			/* start address for the .bss section. defined in linker script */
-extern unsigned long _ebss;			/* end address for the .bss section. defined in linker script */
-
-//extern void _estack;		/* init value for the stack pointer. defined in linker script */
-
-
-
 /* Private typedef -----------------------------------------------------------*/
 /* function prototypes ------------------------------------------------------*/
 void Reset_Handler(void) __attribute__((__interrupt__));
@@ -185,41 +166,6 @@ void (* const g_pfnVectors[])(void) =
 void Reset_Handler(void)
 {
 	SystemInit();
-
-    unsigned long *pulDest;
-    unsigned long *pulSrc;
-
-    //
-    // Copy the data segment initializers from flash to SRAM in ROM mode
-    //
-
-    if (&_sidata != &_sdata) {	// only if needed
-		pulSrc = &_sidata;
-		for(pulDest = &_sdata; pulDest < &_edata; ) {
-			*(pulDest++) = *(pulSrc++);
-		}
-    }
-
-    // Copy the .fastcode code from ROM to SRAM
-
-    if (&_sifastcode != &_sfastcode) {	// only if needed
-    	pulSrc = &_sifastcode;
-		for(pulDest = &_sfastcode; pulDest < &_efastcode; ) {
-			*(pulDest++) = *(pulSrc++);
-		}
-    }
-
-    //
-    // Zero fill the bss segment.
-    //
-    for(pulDest = &_sbss; pulDest < &_ebss; )
-    {
-        *(pulDest++) = 0;
-    }
-
-    //
-    // Call the application's entry point.
-    //
     main();
 }
 
