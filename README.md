@@ -90,7 +90,13 @@ Potential sources of the needed files include the following locations, but I'm h
 * LPC1768.ld was pulled from the [mbed-os](https://github.com/ARMmbed/mbed-os) github repo using the following command:
 	
 	```
-	curl https://raw.githubusercontent.com/ARMmbed/mbed-os/master/targets/TARGET_NXP/TARGET_LPC176X/device/TOOLCHAIN_GCC_ARM/LPC1768.ld -o LPC1768.ld
+	curl -O https://raw.githubusercontent.com/ARMmbed/mbed-os/master/targets/TARGET_NXP/TARGET_LPC176X/device/TOOLCHAIN_GCC_ARM/LPC1768.ld
 	```
 
-`{system,startup}_LPC17xx.{c,h,cpp}` - [mbed-os](https://github.com/ARMmbed/mbed-os) from the [ARMmbed github project](https://github.com/ARMmbed)
+* startup_LPC17xx.S was pulled from the [mbed-os](https://github.com/ARMmbed/mbed-os) github repo using the following command:
+	
+	```
+	curl -O https://raw.githubusercontent.com/ARMmbed/mbed-os/master/targets/TARGET_NXP/TARGET_LPC176X/device/TOOLCHAIN_GCC_ARM/startup_LPC17xx.S
+	```
+
+`system_LPC17xx.{c,h,cpp}` - [mbed-os](https://github.com/ARMmbed/mbed-os) from the [ARMmbed github project](https://github.com/ARMmbed)
