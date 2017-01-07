@@ -1,4 +1,6 @@
 # BareBlinkyLPC1768
+<mark>NOTE: this repo uses submodules to pull in CMSIS dependencies from ARM. Use git clone with the --recursive option to pull in the needed submodules.</mark>
+
 
 BareBlinkyLPC1768 is a bare metal blinky for LPC1768 using the GNU ARM Embedded Toolchain. This is meant to be a pedagogical project that helps the user learn from scratch, but with an attempt to avoid TLDR. This document assumes the user has a background in software development, knows how to use the command line, and is familiar with Eclipse.
 
@@ -77,8 +79,6 @@ In the project, set it up to output *.bin files for the Debug and Release build 
 The sources in this repo have been acquired from various places on the web. It is somewhat of a challenge to find the original source, but this README and the source code will be updated as I find these.
 
 Potential sources of the needed files include the following locations, but I'm having trouble getting all these working together as one:
-
-`core_cm3.h` - Buried in [ARM-software github project](https://github.com/ARM-software/CMSIS)
 
 `LPC17xx.h` - [lpc17xx.h](http://www.keil.com/dd/docs/arm/nxp/lpc17xx/lpc17xx.h) from [ARM Keil](http://www.keil.com/dd/chip/4868.htm)
 
